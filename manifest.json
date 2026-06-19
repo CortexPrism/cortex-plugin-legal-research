@@ -1,0 +1,173 @@
+{
+  "name": "cortex-plugin-legal-research",
+  "version": "1.0.0",
+  "description": "Legal Research Agent — multi-jurisdiction legal research across Korean Law (39 APIs), US PACER, EU EUR-Lex, and UK legislation.gov.uk. Search case law, statutes, regulations, and draft legal memoranda.",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-legal-research",
+  "homepage": "https://cortexprism.io/marketplace/plugins/legal-research",
+  "capabilities": ["tools", "network:fetch"],
+  "tools": [
+    {
+      "name": "legal_search",
+      "description": "Search case law, statutes, regulations, and legal precedents across jurisdictions",
+      "params": [
+        {
+          "name": "query",
+          "type": "string",
+          "description": "Legal research query",
+          "required": true
+        },
+        {
+          "name": "jurisdiction",
+          "type": "string",
+          "description": "Jurisdiction to search",
+          "required": true,
+          "enum": ["kr", "us", "eu", "uk", "all"]
+        },
+        {
+          "name": "source_type",
+          "type": "string",
+          "description": "Source type",
+          "required": false,
+          "enum": ["case_law", "statute", "regulation", "precedent", "all"]
+        },
+        {
+          "name": "date_range",
+          "type": "string",
+          "description": "Date range filter (e.g. 'last_5_years')",
+          "required": false
+        },
+        {
+          "name": "max_results",
+          "type": "number",
+          "description": "Max results (default: 20)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "legal_get_document",
+      "description": "Retrieve the full text of a specific legal document by citation or ID",
+      "params": [
+        {
+          "name": "citation",
+          "type": "string",
+          "description": "Legal citation or document ID",
+          "required": true
+        },
+        {
+          "name": "jurisdiction",
+          "type": "string",
+          "description": "Jurisdiction",
+          "required": true,
+          "enum": ["kr", "us", "eu", "uk"]
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "Output format",
+          "required": false,
+          "enum": ["summary", "full_text", "key_holdings"]
+        }
+      ]
+    },
+    {
+      "name": "legal_analyze",
+      "description": "Analyze a legal scenario against relevant case law and statutes. Identifies applicable precedents, potential arguments, and risks.",
+      "params": [
+        {
+          "name": "scenario",
+          "type": "string",
+          "description": "Description of the legal scenario or question",
+          "required": true
+        },
+        {
+          "name": "jurisdiction",
+          "type": "string",
+          "description": "Primary jurisdiction",
+          "required": true,
+          "enum": ["kr", "us", "eu", "uk"]
+        },
+        {
+          "name": "area_of_law",
+          "type": "string",
+          "description": "Area of law (e.g. contract, IP, employment, criminal)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "legal_compare_jurisdictions",
+      "description": "Compare how different jurisdictions handle a specific legal question or regulatory area",
+      "params": [
+        {
+          "name": "question",
+          "type": "string",
+          "description": "Legal question to compare",
+          "required": true
+        },
+        {
+          "name": "jurisdictions",
+          "type": "string",
+          "description": "Comma-separated jurisdictions to compare",
+          "required": true
+        },
+        {
+          "name": "output_format",
+          "type": "string",
+          "description": "Output format",
+          "required": false,
+          "enum": ["summary", "detailed_table", "memorandum"]
+        }
+      ]
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": { "cortex": ">=1.0.0" },
+  "ui": {
+    "settings": [
+      {
+        "section": "API Keys",
+        "fields": [
+          {
+            "key": "pacerApiKey",
+            "label": "US PACER API Key",
+            "type": "secret",
+            "defaultValue": ""
+          },
+          {
+            "key": "koreanLawApiKey",
+            "label": "Korean Law API Key",
+            "type": "secret",
+            "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "section": "Defaults",
+        "fields": [
+          {
+            "key": "defaultJurisdiction",
+            "label": "Default Jurisdiction",
+            "type": "select",
+            "defaultValue": "us",
+            "enum": [
+              { "label": "US", "value": "us" },
+              { "label": "EU", "value": "eu" },
+              { "label": "UK", "value": "uk" },
+              { "label": "Korea", "value": "kr" }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "humanReview": true
+  }
+}
