@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-legal-research",
-  "version": "1.0.0",
-  "description": "Legal Research Agent — multi-jurisdiction legal research across Korean Law (39 APIs), US PACER, EU EUR-Lex, and UK legislation.gov.uk. Search case law, statutes, regulations, and draft legal memoranda.",
+  "version": "1.0.1",
+  "description": "Legal Research Agent \u2014 multi-jurisdiction legal research across Korean Law (39 APIs), US PACER, EU EUR-Lex, and UK legislation.gov.uk. Search case law, statutes, regulations, and draft legal memoranda.",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -9,7 +9,10 @@
   "license": "MIT",
   "repository": "https://github.com/CortexPrism/cortex-plugin-legal-research",
   "homepage": "https://cortexprism.io/marketplace/plugins/legal-research",
-  "capabilities": ["tools", "network:fetch"],
+  "capabilities": [
+    "tools",
+    "network:fetch"
+  ],
   "tools": [
     {
       "name": "legal_search",
@@ -26,14 +29,26 @@
           "type": "string",
           "description": "Jurisdiction to search",
           "required": true,
-          "enum": ["kr", "us", "eu", "uk", "all"]
+          "enum": [
+            "kr",
+            "us",
+            "eu",
+            "uk",
+            "all"
+          ]
         },
         {
           "name": "source_type",
           "type": "string",
           "description": "Source type",
           "required": false,
-          "enum": ["case_law", "statute", "regulation", "precedent", "all"]
+          "enum": [
+            "case_law",
+            "statute",
+            "regulation",
+            "precedent",
+            "all"
+          ]
         },
         {
           "name": "date_range",
@@ -64,14 +79,23 @@
           "type": "string",
           "description": "Jurisdiction",
           "required": true,
-          "enum": ["kr", "us", "eu", "uk"]
+          "enum": [
+            "kr",
+            "us",
+            "eu",
+            "uk"
+          ]
         },
         {
           "name": "format",
           "type": "string",
           "description": "Output format",
           "required": false,
-          "enum": ["summary", "full_text", "key_holdings"]
+          "enum": [
+            "summary",
+            "full_text",
+            "key_holdings"
+          ]
         }
       ]
     },
@@ -90,7 +114,12 @@
           "type": "string",
           "description": "Primary jurisdiction",
           "required": true,
-          "enum": ["kr", "us", "eu", "uk"]
+          "enum": [
+            "kr",
+            "us",
+            "eu",
+            "uk"
+          ]
         },
         {
           "name": "area_of_law",
@@ -121,13 +150,19 @@
           "type": "string",
           "description": "Output format",
           "required": false,
-          "enum": ["summary", "detailed_table", "memorandum"]
+          "enum": [
+            "summary",
+            "detailed_table",
+            "memorandum"
+          ]
         }
       ]
     }
   ],
   "dependencies": {},
-  "peerDependencies": { "cortex": ">=1.0.0" },
+  "peerDependencies": {
+    "cortex": ">=0.51.0"
+  },
   "ui": {
     "settings": [
       {
@@ -155,11 +190,23 @@
             "label": "Default Jurisdiction",
             "type": "select",
             "defaultValue": "us",
-            "enum": [
-              { "label": "US", "value": "us" },
-              { "label": "EU", "value": "eu" },
-              { "label": "UK", "value": "uk" },
-              { "label": "Korea", "value": "kr" }
+            "options": [
+              {
+                "label": "US",
+                "value": "us"
+              },
+              {
+                "label": "EU",
+                "value": "eu"
+              },
+              {
+                "label": "UK",
+                "value": "uk"
+              },
+              {
+                "label": "Korea",
+                "value": "kr"
+              }
             ]
           }
         ]
@@ -167,7 +214,9 @@
     ]
   },
   "aiDisclosure": {
-    "tools": ["Kilo (DeepSeek) — scaffold and implementation"],
+    "tools": [
+      "Kilo (DeepSeek) \u2014 scaffold and implementation"
+    ],
     "humanReview": true
   }
 }
